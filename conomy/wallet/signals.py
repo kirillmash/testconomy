@@ -1,10 +1,10 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
-from .models import Transaction, Wallet
+from .models import Transaction
 
 
-@receiver(post_save, sender=Transaction)
+@receiver(pre_save, sender=Transaction)
 def update_balance(sender, instance, **kwargs):
     wallet = instance.wallet
     if instance.type == 'Списать':
